@@ -28,3 +28,37 @@
 
 ### week-1-end
 ---
+
+### week-2-start
+
+1. Initialize dbt project:  `dbt init nyc_transit`
+
+2. Create connection profile file `profiles.yml` for minimal duckdb, add path to database location.
+
+3. Edit top level `dbt_project.yml`, adding schema: staging and replacing example models dir with staging dirs
+
+4. Create `packages.yml` to create code-gen dependency. Install at CLI using `dbt deps`.
+
+5. Use code-gen to create sources definition:
+    
+    `dbt run-operation generate_source --args "{"schema_name": "main", "generate_columns": "true", "include_data_types": "true"}"`
+
+    Output is saved in `models\staging\sources.yml`
+
+6. Use `dbt list` to check connected resources.
+
+7. Create .sql to clean data files:
+
+    - `bike_data`: combine data from two different schemas, dropping uncommon columns.
+    - `fhv_bases`: rename base number to correspond with other fhv data.
+    - `fhv_tripdata`: remove SR_flag as its 100% null, rename others.
+    - `fhvhv_tripdata`: updated types, no 100% null fields removed. Remove zero distance trips.
+    - `green_tripdata`: drop 'ehail_fee' column for being 100% null. Update types. Remove zero passenger count trips.
+    - `yellow_tripdata`: updated types, no 100% null fields removed. Remove zero passenger count trips.
+    - `central_park_weather`:  rename to lowercase, no null removals.
+    - `daily_citi_bike_...`:  remove date conversions (dow, year, month) as duplicate of date column that could lead to errors.
+
+8. Use `dbt run` to create staging views of data.
+
+### week-2-end
+---
