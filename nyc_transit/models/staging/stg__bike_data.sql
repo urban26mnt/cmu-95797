@@ -1,53 +1,57 @@
 with source as (
-    SELECT * FROM {{ source('main', 'bike_data') }}
+
+    select * from {{ source('main', 'bike_data') }}
+
 ),
 
 renamed as (
-SELECT 
-    start_dt,
-    end_dt,
-    start_station_id,
-    start_station_name,
-    start_lat,
-    start_lng,
-    end_station_id,
-    end_station_name,
-    end_lat,
-    end_lng,
-    ride_id,
-    filename
-FROM 
-    (SELECT 
-        starttime::datetime start_dt,
-        stoptime::datetime end_dt,
-        "start station id"::varchar start_station_id,
-        "start station name"::varchar start_station_name,
-        "start station latitude"::double start_lat,
-        "start station longitude"::double start_lng,
-        "end station id"::varchar end_station_id,
-        "end station name"::varchar end_station_name,
-        "end station latitude"::double end_lat,
-        "end station longitude"::double end_lng,
-        bikeid::varchar ride_id,
-        filename
-    FROM source
-    WHERE starttime IS NOT NULL)
-    UNION ALL
-    (SELECT
-        started_at::datetime start_dt,
-        ended_at::datetime end_dt,
-        start_station_id,
+
+    select
+        tripduration,
+        starttime,
+        stoptime,
+        "start station id",
+        "start station name",
+        "start station latitude",
+        "start station longitude",
+        "end station id",
+        "end station name",
+        "end station latitude",
+        "end station longitude",
+        bikeid,
+        usertype,
+        "birth year",
+        gender,
+        ride_id,
+        rideable_type,
+        started_at,
+        ended_at,
         start_station_name,
-        start_lat::double,
-        start_lng::double,
-        end_station_id,
+        start_station_id,
         end_station_name,
-        end_lat::double,
-        end_lng::double,
-        ride_id::varchar,
-        filename::varchar filename
-    FROM source
-    WHERE start_dt IS NOT NULL)
+        end_station_id,
+        start_lat,
+        start_lng,
+        end_lat,
+        end_lng,
+        member_casual,
+        filename
+
+    from source
+
 )
 
-SELECT * FROM renamed
+select
+	coalesce(starttime, started_at)::timestamp as started_at_ts,
+	coalesce(stoptime, ended_at)::timestamp as ended_at_ts,
+	coalesce(tripduration::int,datediff('second', started_at_ts, ended_at_ts)) tripduration,
+	coalesce("start station id", start_station_id) as start_station_id,  
+	coalesce("start station name", start_station_name) as start_station_name,
+	coalesce("start station latitude", start_lat)::double as start_lat,
+	coalesce("start station longitude", start_lng)::double as start_lng, 
+	coalesce("end station id", end_station_id) as end_station_id,  
+	coalesce("end station name", end_station_name) as end_station_name,
+	coalesce("end station latitude", end_lat)::double as end_lat,
+	coalesce("end station longitude", end_lng)::double as end_lng,
+	filename
+from renamed

@@ -1,4 +1,3 @@
-
 sources:
   - name: main
     tables:
@@ -290,6 +289,6 @@ sources:
           - name: congestion_surcharge
             data_type: DOUBLE
           - name: airport_fee
-            data_type: INTEGER
+            data_type: DOUBLE
           - name: filename
             data_type: CHARACTER VARYING(256)

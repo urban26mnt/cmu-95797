@@ -1,22 +1,31 @@
 with source as (
-    SELECT * FROM {{ source('main', 'daily_citi_bike_trip_counts_and_weather') }}
+
+    select * from {{ source('main', 'daily_citi_bike_trip_counts_and_weather') }}
+
 ),
 
 renamed as (
-    SELECT
-        date::date date,
-        trips::double trips,
-        precipitation::double precipitation,
-        snow_depth::double snow_depth,
-        snowfall::double snowfall,
-        max_temperature::double temp_max,
-        min_temperature::double temp_min,
-        average_wind_speed::double wind_speed_avg,
-        stations_in_service::int stations_in_service,
-        holiday::boolean holiday,
+
+    select
+        date::date as date,
+        trips::int as trips,
+        precipitation::double as precipitation,
+        snow_depth::double as snow_depth,
+        snowfall::double as snowfall,
+        max_temperature::double as max_temperature,
+        min_temperature::double as min_temperature,
+        try_cast(average_wind_speed as double) as average_wind_speed,
+        dow::int as dow,
+        year::int as year,
+        month::int as month,
+        holiday::bool as holiday,
+        try_cast(stations_in_service as int) as stations_in_service,
+        weekday::bool as weekday,
+        weekday_non_holiday::bool as weekday_non_holiday,
         filename
-    FROM
-        source
+
+    from source
+
 )
 
-SELECT * FROM renamed
+select * from renamed
