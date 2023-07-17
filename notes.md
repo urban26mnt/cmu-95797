@@ -67,3 +67,27 @@ Update with week 2 answers
 
 ---
 ### week-3-start
+
+1. Update packages to include `dbt-expectations`, install using:
+    
+    > `dbt deps`
+
+2. Update `sources.yml` to include descriptions and tests
+
+3. Use code-gen to create schema.yml
+
+    Confirm the project builds without error, then run-operation:
+    > `dbt run`
+
+    > `dbt run-operation generate_model_yaml --args "{"model_names": ["stg__bike_data", "stg__central_park_weather", "stg__daily_citi_bike_trip_counts_and_weather", "stg__fhv_bases", "stg__fhv_tripdata", "stg__fhvhv_tripdata", "stg__green_tripdata", "stg__yellow_tripdata"]}"`
+
+    Place output in `schema.yml` file located at models\staging.
+
+4. Update `schema.yml` with descriptions, quality checks
+
+5. Use `dbt build` to check the entire project, address issues with sql staging ingest.
+
+6. Create documentation using `dbt docs generate` then `dbt docs serve`
+
+### week-3-end
+---
