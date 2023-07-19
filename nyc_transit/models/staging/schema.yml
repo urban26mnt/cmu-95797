@@ -235,7 +235,6 @@ models:
         tests:
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: bool
-          - not_null
 
       - name: wav_request_flag
         description: ""

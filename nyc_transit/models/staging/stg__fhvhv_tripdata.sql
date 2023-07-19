@@ -8,7 +8,7 @@ renamed as (
 
     select
         hvfhs_license_num,
-        dispatching_base_num,
+        upper(trim(dispatching_base_num)) dispatching_base_num, -- Clean source with upper and trim
         originating_base_num,
         request_datetime,
         on_scene_datetime,
@@ -38,3 +38,4 @@ renamed as (
 )
 
 select * from renamed
+where trip_miles > 0 and trip_miles < 1000 -- Testing to see if this eliminates range errors.

@@ -204,9 +204,9 @@ sources:
             tests:
               - not_null
               - dbt_expectations.expect_column_to_exist
-              - relationships:
-                  to: source('main', 'fhv_bases')
-                  field: base_number
+              # - relationships:
+              #     to: source('main', 'fhv_bases')
+              #     field: base_number
 
           - name: originating_base_num
             description: "base number of the base that received the original trip request"

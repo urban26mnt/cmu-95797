@@ -7,7 +7,7 @@ with source as (
 renamed as (
 
     select
-        dispatching_base_num,
+        upper(trim(dispatching_base_num)) dispatching_base_num, -- Clean source with upper and trim
         pickup_datetime,
         dropoff_datetime,
         pulocationid,
