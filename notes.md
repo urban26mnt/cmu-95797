@@ -91,3 +91,33 @@ Update with week 2 answers
 
 ### week-3-end
 ---
+
+### week-4-start
+
+1. Load seed file to nyc_transit\seeds\   Use `dbt seed` or `dbt build` to run.
+
+2. Load schema file template to `models\mart`.
+
+3. Create mart sql files at `models\mart` for dimensions and fact tables creation.
+
+4. Use `dbt run` / `dbt build` to create mart tables.
+
+5. Create analysis sql file `bike_trips_and_duration_by_weekday.sql`
+
+    - Use `dbt compile` to create the output
+    - Run duckdb, `.read '.\nyc_transit\target\compiled\nyc_transit\analyses\bike_trips_and_duration_by_weekday.sql'`
+
+6. Create analysis sql file `taxi_trips_ending_at_airport.sql`
+
+    - Use `dbt compile` to create the output
+    - Run duckdb, `.read '.\nyc_transit\target\compiled\nyc_transit\analyses\taxi_trips_ending_at_airport.sql'`
+
+7. Create analysis sql file `inter_borough_taxi_trips_by_weekday.sql`
+
+    - Use `dbt compile` to create the output
+    - Run duckdb, `.read '.\nyc_transit\target\compiled\nyc_transit\analyses\inter_borough_taxi_trips_by_weekday.sql'`
+
+8. Save outputs to `answers`
+
+### week-4-end
+---
