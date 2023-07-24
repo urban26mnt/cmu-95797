@@ -13,7 +13,7 @@ renamed as (
         passenger_count,
         trip_distance,
         ratecodeid,
-        {{flag_to_bool("store_and_fwd_flag")}} as store_and_fwd_flag, -- Clean source with upper and trim
+        {{flag_to_bool("store_and_fwd_flag")}} as store_and_fwd_flag,
         pulocationid,
         dolocationid,
         payment_type,
@@ -33,4 +33,3 @@ renamed as (
 )
 
 select * from renamed
-where trip_distance > 0 and trip_distance < 1000 -- Testing to see if this eliminates range errors.
