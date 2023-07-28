@@ -32,6 +32,24 @@ models:
       - name: service_zone
         description: ""
 
+  - name: mart__dim_events
+    description: "events, used to join event ids with type of event."
+    columns:
+      - name: insert_timestamp
+        description: "insertion timestamp"
+      
+      - name: event_id
+        description: ""
+      
+      - name: event_type
+        description: ""
+      
+      - name: user_id
+        description: ""
+      
+      - name: event_timestamp
+        description: ""
+
   - name: mart__fact_all_bike_trips
     description: "bike trip data normalised with station data stripped out to dim"
     columns:
