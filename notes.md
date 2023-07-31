@@ -121,3 +121,65 @@ Update with week 2 answers
 
 ### week-4-end
 ---
+
+### week-5-start
+
+1. Load seed file to nyc_transit\seeds\  Use `dbt seed`
+
+2. Create `mart__fact_trips_by_borough` and update `schema.yml`. Used `dbt build`.
+
+3. Create analysis sql `trips_by_borough.sql`. Use `dbt compile`. Run from target.
+
+    - `.once '.\answers\trips_by_borough.txt'`
+    - `.read '.\nyc_transit\target\compiled\nyc_transit\analyses\trips_by_borough.sql'`
+
+
+4. Create group by analysis - number of trips and average duration by borough and zone
+
+    - `.once '.\answers\trips_duration_grouped_by_borough_zone.txt'`
+    - `.read '.\nyc_transit\target\compiled\nyc_transit\analyses\trips_duration_grouped_by_borough_zone.sql'`
+
+5. Create anti join of trips without location
+
+    - `.once '.\answers\taxi_trips_no_valid_pickup_location_id.txt'`
+    - `.read '.\nyc_transit\target\compiled\nyc_transit\analyses\taxi_trips_no_valid_pickup_location_id.sql'`
+
+6. Create zones_with_less_than_100k_trips.sql
+
+    - `.once '.\answers\zones_with_less_than_100k_trips.txt'`
+    - `.read '.\nyc_transit\target\compiled\nyc_transit\analyses\zones_with_less_than_100k_trips.sql'`
+
+7. Create pivot_trips_by_borough.sql
+
+    - `.once '.\answers\pivot_trips_by_borough.txt'`
+    - `.read '.\nyc_transit\target\compiled\nyc_transit\analyses\pivot_trips_by_borough.sql'`
+
+8. Create comparison of an individual fare to the zone, borough and overall average fare using the fare_amount in yellow taxi trip data
+
+    - `.once '.\answers\yellow_taxi_fare_comparison.txt'`
+    - `.read '.\nyc_transit\target\compiled\nyc_transit\analyses\yellow_taxi_fare_comparison.sql'`
+
+9. Dedupe the events table
+
+    - `.once '.\answers\dedupe.txt'`
+    - `.read '.\nyc_transit\target\compiled\nyc_transit\analyses\dedupe.sql'`
+
+10. Create Seven day moving average weather
+
+    - `.once '.\answers\seven_day_moving_average_prcp.txt'`
+    - `.read '.\nyc_transit\target\compiled\nyc_transit\analyses\seven_day_moving_average_prcp.sql'`
+    (Needs debugging)
+
+11. Create seven_day_moving_aggs_weather.sql
+
+    - `.once '.\answers\seven_day_moving_aggs_weather.txt'`
+    - `.read '.\nyc_transit\target\compiled\nyc_transit\analyses\seven_day_moving_aggs_weather.sql'`
+
+12. Create average_time_between_pickups.sql
+
+    - `.once '.\answers\average_time_between_pickups.txt'`
+    - `.read '.\nyc_transit\target\compiled\nyc_transit\analyses\average_time_between_pickups.sql'`
+    (Needs debugging)
+
+### week-5-end
+---
